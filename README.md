@@ -1,6 +1,7 @@
 ## Sistem Pengurusan Surat Keluar/Masuk (e-Letters)
 
 **Abstrak**
+
 Perkembangan teknologi pengkomputeran dan sistem pengurusan secara berkomputer pada masa kini telah menjadi satu fenomena kemestian kepada sektor  kerajaan khususnya dalam memastikan proses kerja menjadi lebih cepat, pantas, produktif dan sistematik. Justeru itu, dokumentasi surat keluar/masuk harian di sekolah sememangnya diberi perhatian dalam memastikan maklumat yang diterima adalah tepat.
 
 Dalam proses merekod maklumat ini, seringkali timbul beberapa permasalahan antaranya pengurusan yang masih lagi dilakukan secara manual yakni (tulis, cetak, semak dan simpan), maklumat yang tidak jelas dan lambat sampai kepada Ketua Jabatan (KJ). Ini merupakan satu masalah yang sering berlaku di dalam pengurusan di sekolah khususnya.
@@ -9,7 +10,9 @@ Berdasarkan permasalahan ini dan dengan menganalisa gejala-gejala tersebut, kami
 Untuk lebih meningkatkan produktiviti pengurusan disekolah, sistem ini akan memberi impak yang baik dan berkesan seterusnya membudayakan teknologi dalam perkhidmatan seiring dengan hasrat kerajaan Malaysia.
 
 **Ahli Kumpulan**
+
 PPD : PPD MANJUNG
+
 1. ZULKIFLI BIN MOHAMED (ABA1028 – SK SERI MANJUNG)
 2. ROSLINA BINTI OTHMAN (AHA1002 - KOLEJ VOKASIONAL SERI MANJUNG)
 3. WAN NURUL ASHKANN BINTI ABU BAKAR (ABA1004 - SK GELONG GAJAH)
