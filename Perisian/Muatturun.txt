@@ -1,0 +1,2 @@
+MAMP - http://downloads3.mamp.info/MAMP-PRO-WINDOWS/releases/3.3.0/MAMP_MAMP_PRO_3.3.0.exe
+SQLyog - https://github.com/webyog/sqlyog-community/wiki/Downloads

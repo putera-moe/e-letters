@@ -5,7 +5,8 @@
     "require": {
         "adodb/adodb-php": "^5.20",
         "dompdf/dompdf": "^0.7.0",
-        "phpmailer/phpmailer": "^5.2"
+        "phpmailer/phpmailer": "^5.2",
+        "league/oauth2-google": "^2.0"
     },
     "license": "CyberSpace Development Team",
     "authors": [

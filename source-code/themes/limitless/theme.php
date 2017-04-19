@@ -18,7 +18,7 @@ defined('_WEB') or die('No Access');
 require_once(WEB_ROOT.DS."global.php");
 
 function ThemesHeader() {
-	global $config, $db, $cookie, $locale, $w_user, $body, $pagetitle, $cssload, $module_name, $meta, $author, $jsload, $jsplugins, $jquery, $jscript;
+	global $config, $db, $cookie, $locale, $w_user, $body, $pagetitle, $cssload, $module_name, $meta, $jsload, $jsplugins, $jquery, $jscript;
 	$module_name = strtolower(MODULE);
 	$_p = strtolower($_REQUEST['p']);
 
@@ -58,7 +58,7 @@ function ThemesHeader() {
 	if (isset($pagetitle)) {
 		$pagetitle = $pagetitle;
 	} else {
-		$pagetitle = SITENAME;
+		$pagetitle = SITENAME . ' : ' . $config->SiteDescription;
 	}
 	echo "<title>$pagetitle</title>\n";
 
@@ -107,7 +107,7 @@ function ThemesHeader() {
 
 	# Apps
 	echo "<script src=\"".URL_THEMES."/assets/js/core/app.js.php?m=$module_name\"></script>\n";
-	echo "<script src=\"".URL_THEMES."/assets/js/pages/form_checkboxes_radios.js\"></script>\n";
+	echo "<script src=\"".URL_THEMES."/assets/js/pages/form_checkboxes.js\"></script>\n";
 	
 	###############################################
 
@@ -156,22 +156,10 @@ function ThemesHeader() {
 
 	#################
 
-	# USER MENU
-	if (is_online($w_user))
-	{
-		
-	}
-	else
-	{
-		
-	}
-
 	if ( (!defined('FULLBODY')) && (!defined('CLOSED')) )
 	{
 		$t = new Template;
-		$t->Load(WEB_TEMPLATES."system".DS."header.html");
-		$t->Replace("TOP_MENU", $top_menu);
-		$t->Replace("USER_MENU", $user_menu);
+		$t->Load(WEB_TEMPLATES_SYSTEM.'header.html');
 		$t->Replace("USER_NAME", getUserDetail('Nama'));		
 		$t->Publish();
 	}
@@ -190,7 +178,7 @@ function ThemesFooter() {
 	if ( (!defined('FULLBODY')) && (!defined('CLOSED')) )
 	{
 		$t = new Template;
-		$t->Load(WEB_TEMPLATES."system".DS."footer.html");
+		$t->Load(WEB_TEMPLATES_SYSTEM.'footer.html');
 		$t->Publish();	
 	}
 }

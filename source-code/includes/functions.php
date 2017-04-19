@@ -56,12 +56,9 @@ function RecordCount($sql) {
 	global $db;
 
 	$rs = $db->Execute($sql);
-	if (!$rs)
-	{
+	if (!$rs) {
 		die($db->ErrorMsg());
-	}
-	else
-	{
+	} else {
 		$tr = $rs->RecordCount();
 	}
 
@@ -71,8 +68,7 @@ function getv($field,$table,$where,$value) {
 	global $db;
 
 	$rs = $db->Execute("SELECT ".$field." FROM ".$table." WHERE ".$where."='".$value."'");
-	if (!$rs)
-	{
+	if (!$rs) {
 		return $db->ErrorMsg();
 		die($db->ErrorMsg());
 	}
@@ -301,6 +297,10 @@ function random_string($type = 'alnum', $len = 6) {
 		case 'unique' : return md5(uniqid(mt_rand()));
 		break;
 	}
+}
+
+function settimeout($content,$time) {
+	echo "setTimeout(function() { $content },$time);";
 }
 
 ?>

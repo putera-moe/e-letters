@@ -33,7 +33,7 @@ class WebConfig
 	var $SiteDescription = "Sistem Pengurusan Surat Keluar/Masuk";
 	var $Keywords = "web, system, integration, laman web, laman, sistem, sistem surat, surat keluar masuk, perisian sistem";
 	var $UserSession = 3600; // 1 jam
-	var $SessionRemember = 86400; // 24 jam
+	var $UserSessionRemember = 86400; // 24 jam
 	var $DefaultLang = 'ms'; // ms | en
 
 	# Tema Web

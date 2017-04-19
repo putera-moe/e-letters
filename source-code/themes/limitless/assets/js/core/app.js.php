@@ -2,8 +2,6 @@
     require_once("../../../../../global.php");
     header("Content-Type: text/javascript");
     global $config, $w_user;
-    $m = filter_txt($_REQUEST['m']);
-    $id = filter_num($_REQUEST['id']);
 ?>
 /*
 #############################################################################

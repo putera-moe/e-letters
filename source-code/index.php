@@ -17,9 +17,13 @@
 require_once("global.php");
 
 function Login() {
-	global $body;
+	global $body, $jquery;
+
 	define('FULLBODY', true);
+	
 	$body = '<body class="login-container">';
+	$jquery = '$(\'#user_id\').focus();';
+
 	include(WEB_INCLUDES."header.php");
 	$t = new Template;
 	$t->Load(WEB_TEMPLATES_SYSTEM.'login.html');
@@ -32,6 +36,7 @@ function Auth() {
 	// Dapatkan apa yang di POST
 	$user_id = $_REQUEST['user_id'];
 	$pwd = $_REQUEST['pwd'];
+	$remember_me = $_REQUEST['remember_me'];
 
 	// Encrypted password dia
 	$encrypted_pwd = strtoupper(md5(strtoupper($pwd) . $config->LicenseKey));
@@ -56,7 +61,8 @@ function Auth() {
 
 		// set cookie
 		$cookie_value = base64_encode("$user_id|$session_id");
-		set_cookie("w_user",$cookie_value,$config->UserSession);
+		$UserSession = (!empty($remember_me)) ? $config->UserSessionRemember : $config->UserSession;
+		set_cookie("w_user",$cookie_value,$UserSession);
 
 		// selesai, redirect user ke dashboard
 		header('Location: '.$config->SiteUrl);
@@ -106,6 +112,8 @@ function Dashboard()
 
 	if (is_online($w_user))
 	{
+		define('MODULE', 'Dashboard');
+		
 		include(WEB_INCLUDES."header.php");
 		$t = new Template;
 		$t->Load(WEB_TEMPLATES.'dashboard.html');

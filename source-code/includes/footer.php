@@ -32,7 +32,7 @@ function WebFooter() {
 	global $config, $jquery, $jscript, $jsload, $w_user;
 
 	ThemesFooter();
-	echo "\n<!-- Loading Time: ".LoadingTime()." //-->\n";
+	echo "\n<!-- Jumlah Masa Loading : ".LoadingTime()." //-->\n";
 	echo "</body>\n";
 	echo "</html>";
 	ob_end_flush();

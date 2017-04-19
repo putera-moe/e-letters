@@ -29,6 +29,7 @@ if (is_online($w_user)) {
 
 # Global
 define("CHARSET","UTF-8");
+define("VERSION",$config->WebVersion);
 define("SITENAME",$config->SiteName);
 define("SITE_DESCRIPTION",$config->SiteDescription);
 define("DEVELOPER",$config->Developer);

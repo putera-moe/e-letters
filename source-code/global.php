@@ -38,7 +38,7 @@ define('DS',DIRECTORY_SEPARATOR);
 
 # Dapatkan fail configuration.php
 if (!file_exists(WEB_BASE.DS."configuration.php") || (filesize(WEB_BASE.DS."configuration.php") < 10)) {
-	die('Maaf ! Fail configuration.php tidak dijumpai ! Sila semak.');
+	die('Fail configuration.php tidak dijumpai !');
 }
 require_once(WEB_BASE.DS."configuration.php");
 require_once(WEB_BASE.DS.'includes'.DS.'defines.php');
@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 if (!file_exists(WEB_BASE.DS.'vendor'.DS.'autoload.php')) {
-	die('PHP Composer autoload gagal ! Sila pastikan PHP Composer telah dikemaskini.');
+	die('PHP Composer autoload gagal ! Sila pastikan composer telah dikemaskini.');
 }
 require_once(WEB_BASE.DS.'vendor'.DS.'autoload.php');
 require_once(WEB_INCLUDES."database.php");
@@ -157,13 +157,13 @@ if (isset($newlang) AND !stripos_clone($newlang,"."))
 {
 	if (file_exists(WEB_LANGUAGES."lang-".$newlang.".php"))
 	{
-		set_cookie("locale",$newlang,time()+31536000,$config->SiteDomain);
+		set_cookie("locale",$newlang,time()+31536000);
 		include_once(WEB_LANGUAGES."lang-".$newlang.".php");
 		$config->setLanguage($newlang);
 	}
 	else
 	{
-		set_cookie("locale",$default_lang,time()+31536000,$config->SiteDomain);
+		set_cookie("locale",$default_lang,time()+31536000);
 		include_once(WEB_LANGUAGES."lang-".$default_lang.".php");
 		$config->setLanguage($default_lang);
 	}
@@ -175,7 +175,7 @@ else if (isset($locale))
 }
 else
 {
-	set_cookie("locale",$default_lang,time()+31536000,$config->SiteDomain);
+	set_cookie("locale",$default_lang,time()+31536000);
 	include_once(WEB_LANGUAGES."lang-".$default_lang.".php");
 	$config->setLanguage($default_lang);
 }

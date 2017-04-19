@@ -1,0 +1,13 @@
+1. Download MAMP dan juga SQLyog
+2. Install MAMP (Tak perlu install MAMP PRO)
+   (Gunakan PHP Versi 5.6.x sahaja, kita tidak menggunakan PHP 7)
+3. Install SQLyog
+
+MAMP
+========
+MAMP adalah perisian yang mengandungi Apache Web Server, PHP dan juga MySQL
+
+
+SQLyog
+========
+SQLyog digunakan untuk manage database MySQL

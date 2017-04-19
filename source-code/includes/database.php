@@ -22,7 +22,7 @@ $db->debug = $config->DatabaseDebug;
 $db->connect($config->DatabaseHost,$config->DatabaseUser,$config->DatabasePass,$config->DatabaseName);
 if (!$db->isConnected())
 {
-	die('Database connection failed !');
+	die('Sambungan ke pangkalan data e-letters gagal !');
 }
 
 ?>
