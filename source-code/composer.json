@@ -1,0 +1,17 @@
+{
+    "name": "cyberspace/eletters",
+    "description": "Sistem Pengurusan Surat Keluar/Masuk (e-Letters)",
+    "type": "project",
+    "require": {
+        "adodb/adodb-php": "^5.20",
+        "dompdf/dompdf": "^0.7.0",
+        "phpmailer/phpmailer": "^5.2"
+    },
+    "license": "CyberSpace Development Team",
+    "authors": [
+        {
+            "name": "CyberSpace Development Team",
+            "email": "jtkmjg@moe.edu.my"
+        }
+    ]
+}

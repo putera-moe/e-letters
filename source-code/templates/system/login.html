@@ -1,0 +1,47 @@
+<div class="page-container">
+	<div class="page-content">
+		<div class="content-wrapper">
+
+			<form action="index.php" method="POST">
+				<div class="panel panel-body login-form">
+					<div class="text-center">
+						<div class="icon-object border-slate-300 text-slate-300">
+							<i class="icon-user"></i>
+						</div>
+						<h5 class="content-group">
+							{D_SITENAME}
+							<small class="display-block">{D_SITE_DESCRIPTION}</small>
+						</h5>
+					</div>
+
+					<div class="form-group has-feedback has-feedback-left">
+						<input name="user_id" type="text" class="form-control" placeholder="ID Pengguna">
+						<div class="form-control-feedback">
+							<i class="icon-user text-muted"></i>
+						</div>
+					</div>
+
+					<div class="form-group has-feedback has-feedback-left">
+						<input name="pwd" type="password" class="form-control" placeholder="Kata Laluan">
+						<div class="form-control-feedback">
+							<i class="icon-lock2 text-muted"></i>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-block">
+							Log Masuk
+							<i class="icon-circle-right2 position-right"></i>
+						</button>
+					</div>
+				</div>
+				<input name="p" type="hidden" value="auth">
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<div class="footer text-muted text-center">
+	&copy; {D_YEAR}. <a href="#">{D_SITENAME}</a> Oleh {D_DEVELOPER}
+</div>
