@@ -109,6 +109,9 @@ function ThemesHeader() {
 	echo "<script src=\"".URL_THEMES."/assets/js/core/app.js.php?m=$module_name\"></script>\n";
 	echo "<script src=\"".URL_THEMES."/assets/js/pages/form_checkboxes.js\"></script>\n";
 	
+	# Data Tables
+	echo "<script src=\"".URL_THEMES."/assets/js/pages/datatables_basic.js\"></script>\n";
+
 	###############################################
 
 	# System Default Ajax & JS Library

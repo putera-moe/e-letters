@@ -114,9 +114,24 @@ function Dashboard()
 	{
 		define('MODULE', 'Dashboard');
 		
+		if (is_admin($w_user))
+		{
+			$AdminMenu = '<div class="col-sm-6 col-md-4 mb-15">
+				<a href="/?p=senarai-pengguna" class="btn btn-default btn-block btn-float btn-float-lg">
+					<div class="icon-object border-success text-success">
+						<i class="icon-users"></i>
+					</div>
+					<span class="h4 text-bold no-margin-top no-padding-top mb-10">
+						Senarai Pengguna
+					</span>
+				</a>
+			</div>';
+		}
+
 		include(WEB_INCLUDES."header.php");
 		$t = new Template;
 		$t->Load(WEB_TEMPLATES.'dashboard.html');
+		$t->Replace('ADMIN_MENU',$AdminMenu);
 		$t->Publish();
 		include(WEB_INCLUDES."footer.php");
 	}
@@ -126,6 +141,112 @@ function Dashboard()
 	}
 }
 
+
+function SenaraiPengguna()
+{
+	global $db, $config, $w_user;
+
+	if (is_admin($w_user))
+	{
+		# DAPATKAN SEMUA DATA PENGGUNA
+		$r = $db->Execute("SELECT * FROM users");
+		if (!$r) {
+			die($db->ErrorMsg());
+		}
+
+		if ($r->RecordCount() > 0)
+		{
+			while ($row = $r->FetchRow())
+			{
+				$Username = $row['user_id'];
+				$Nama = $row['nama'];
+				$Jawatan = $row['jawatan'];
+				$StatusOnline = $row['status_online'];
+				$StatusAkaun = $row['account_status'];
+
+				$data_user .= '<tr>
+					<td>'.$Username.'</td>
+					<td>'.$Nama.'</td>
+					<td>'.$Jawatan.'</td>
+					<td>'.$StatusOnline.'</td>
+					<td>'.$StatusAkaun.'</td>
+					<td width="200" align="center">
+						<button type="button" class="btn btn-xlg bg-primary">Edit</button>
+						<button type="button" class="btn btn-xlg bg-danger">Padam</button>
+					</td>
+				</tr>';
+			}
+		}
+
+
+		include(WEB_INCLUDES."header.php");
+		$t = new Template;
+		$t->Load(WEB_TEMPLATES.'senarai-pengguna.html');
+		$t->Replace('DATA_PENGGUNA', $data_user);
+		$t->Publish();
+		include(WEB_INCLUDES."footer.php");
+	}
+	else
+	{
+		Login();
+	}
+}
+
+function TambahPengguna()
+{
+	global $db, $config, $w_user;
+
+	if (is_admin($w_user))
+	{
+		include(WEB_INCLUDES."header.php");
+		$t = new Template;
+		$t->Load(WEB_TEMPLATES.'tambah-pengguna.html');
+		$t->Publish();
+		include(WEB_INCLUDES."footer.php");
+	}
+	else
+	{
+		Login();
+	}
+}
+
+function SimpanRekodPengguna()
+{
+	global $db, $config, $w_user;
+
+	if (is_admin($w_user))
+	{
+		// Dapatkan maklumat form
+		$username = $_REQUEST['username'];
+		$pwd = $_REQUEST['pwd'];
+		$nama = $_REQUEST['nama'];
+		$jawatan = $_REQUEST['jawatan'];
+		$status_akaun = $_REQUEST['status_akaun'];
+		$kumpulan_pengguna = $_REQUEST['kumpulan_pengguna'];
+
+		// check username dulu
+		$record = RecordCount("SELECT * FROM users WHERE user_id='$username'");
+		if ($record == 1)
+		{
+			die('Maaf ! username ini telah wujud dalam sistem.');
+		}
+
+		// Encrypted password dia
+		$encrypted_pwd = strtoupper(md5(strtoupper($pwd) . $config->LicenseKey));
+
+		// masuk dalam database
+		$r = $db->Execute("INSERT INTO users (user_id,pwd,account_status,user_role,nama,jawatan) VALUES ('$username','$encrypted_pwd','$status_akaun','$kumpulan_pengguna','$nama','$jawatan')");
+		if (!$r) {
+			die($db->ErrorMsg());
+		}
+
+		header('Location: '.SITEURL.'/?p=senarai-pengguna');
+	}
+	else
+	{
+		Login();
+	}
+}
 
 
 #-------------------------------------------------
@@ -143,6 +264,25 @@ switch ($p)
 	break;
 	case "logout":
 		Logout();
+	break;
+
+	###########################
+	# Fungsi Administrator
+	###########################
+	case "senarai-pengguna":
+		SenaraiPengguna();
+	break;
+	case "tambah-pengguna":
+		TambahPengguna();
+	break;
+	case "padam-pengguna":
+		PadamPengguna();
+	break;
+	case "edit-pengguna":
+		EditPengguna();
+	break;
+	case "simpan-rekod-pengguna":
+		SimpanRekodPengguna();
 	break;
 }
 ?>

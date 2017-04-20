@@ -29,12 +29,13 @@ CREATE TABLE `users` (
   `account_status` varchar(255) NOT NULL DEFAULT 'AKTIF' COMMENT 'Akaun Status',
   `user_role` varchar(255) NOT NULL DEFAULT 'user',
   `nama` varchar(255) DEFAULT NULL,
+  `jawatan` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`user_id`,`pwd`,`session_id`,`status_online`,`account_status`,`user_role`,`nama`) values (1,'admin','DB777E4E7DE0B102F961AC8642735AC5','','OFFLINE','AKTIF','admin','Administrator');
+insert  into `users`(`id`,`user_id`,`pwd`,`session_id`,`status_online`,`account_status`,`user_role`,`nama`,`jawatan`) values (1,'admin','DB777E4E7DE0B102F961AC8642735AC5','','OFFLINE','AKTIF','admin','Administrator','Pentadbir'),(2,'putera','9B4557ACA1AF16938F14BAD44908C5EB','','OFFLINE','AKTIF','user','Zulkifli Mohamed','Juruteknik Komputer');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
