@@ -65,11 +65,11 @@ function Auth() {
 		set_cookie("w_user",$cookie_value,$UserSession);
 
 		// selesai, redirect user ke dashboard
-		header('Location: '.$config->SiteUrl);
+		header('Location: '.SITEURL);
 	}
 	else
 	{
-		header('Location: '.$config->SiteUrl.'/?error=1');
+		header('Location: '.SITEURL.'/?error=1');
 	}	
 }
 function Logout()
@@ -83,7 +83,7 @@ function Logout()
 	}
 
 	delete_cookie('w_user');
-	header('Location: '.$config->SiteUrl);
+	header('Location: '.SITEURL);
 }
 
 //===============================================================
@@ -117,7 +117,7 @@ function Dashboard()
 		if (is_admin($w_user))
 		{
 			$AdminMenu = '<div class="col-sm-6 col-md-4 mb-15">
-				<a href="/?p=senarai-pengguna" class="btn btn-default btn-block btn-float btn-float-lg">
+				<a href="index.php?p=senarai-pengguna" class="btn btn-default btn-block btn-float btn-float-lg">
 					<div class="icon-object border-success text-success">
 						<i class="icon-users"></i>
 					</div>

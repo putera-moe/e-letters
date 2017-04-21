@@ -4,7 +4,7 @@
 
 			<div class="row mb-20">
 				<div class="col-xs-12">
-					<a href="/?p=tambah-pengguna" class="btn btn-xlg bg-primary">
+					<a href="index.php?p=tambah-pengguna" class="btn btn-xlg bg-primary">
 						Tambah Pengguna
 					</a>
 				</div>
@@ -14,7 +14,7 @@
 				<div class="col-xs-12">
 					<div class="panel panel-flat">
 						<div class="panel-body">
-							<form class="form-horizontal" action="/?p=simpan-rekod-pengguna" method="post">
+							<form class="form-horizontal" action="index.php" method="post">
 								
 								<fieldset class="content-group">
 
@@ -73,6 +73,9 @@
 										Tambah Pengguna <i class="icon-arrow-right14 position-right"></i>
 									</button>
 								</div>
+
+								<input type="hidden" name="p" value="simpan-rekod-pengguna">
+
 							</form>
 						</div>
 					</div>

@@ -29,7 +29,7 @@ class WebConfig
 	# Site Configuration
 	var $WebDebug = true;
 	var $SiteName = "e-Letters";
-	var $SiteUrl = "http://www.e-letters.dev";
+	var $SiteUrl = "http://localhost/e-letters/source-code";
 	var $SiteDescription = "Sistem Pengurusan Surat Keluar/Masuk";
 	var $Keywords = "web, system, integration, laman web, laman, sistem, sistem surat, surat keluar masuk, perisian sistem";
 	var $UserSession = 3600; // 1 jam
