@@ -1,0 +1,87 @@
+<div class="page-container">
+	<div class="page-content">
+		<div class="content-wrapper">
+
+			<div class="row mb-20">
+				<div class="col-xs-12">
+					<a href="index.php?p=senarai-pengguna" class="btn btn-xlg bg-primary">
+						<i class="icon-circle-left2 position-left"></i> Kembali
+					</a>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="panel panel-flat">
+						<div class="panel-body">
+							<form class="form-horizontal" action="index.php" method="post">
+								
+								<fieldset class="content-group">
+
+									<div class="form-group">
+										<label class="control-label col-md-3 col-lg-2">Username</label>
+										<div class="col-md-9 col-lg-10">
+											<input name="username" type="text" class="form-control" value="#USERNAME#">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-md-3 col-lg-2">Kata Laluan</label>
+										<div class="col-md-9 col-lg-10">
+											<input name="pwd" type="password" class="form-control">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-md-3 col-lg-2">Nama Pengguna</label>
+										<div class="col-md-9 col-lg-10">
+											<input name="nama" type="text" class="form-control" value="#NAMA#">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-md-3 col-lg-2">Jawatan</label>
+										<div class="col-md-9 col-lg-10">
+											<input name="jawatan" type="text" class="form-control" value="#JAWATAN#">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-md-3 col-lg-2">Status Akaun</label>
+										<div class="col-md-9 col-lg-10">
+											<select name="status_akaun" class="form-control">
+												<option value="AKTIF" #STATUS_AKAUN_AKTIF#>Aktif</option>
+												<option value="TIDAK AKTIF" #STATUS_AKAUN_TIDAK_AKTIF#>Tidak Aktif</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-md-3 col-lg-2">Kumpulan Pengguna</label>
+										<div class="col-md-9 col-lg-10">
+											<select name="kumpulan_pengguna" class="form-control">
+												<option value="admin" #KUMP_PENGGUNA_ADMIN#>Pentadbir</option>
+												<option value="user" #KUMP_PENGGUNA_USER#>Pengguna Biasa</option>
+											</select>
+										</div>
+									</div>
+
+								</fieldset>
+
+								<div class="text-right">
+									<button type="submit" class="btn btn-primary">
+										Simpan Rekod Pengguna <i class="icon-arrow-right14 position-right"></i>
+									</button>
+								</div>
+
+								<input type="hidden" name="p" value="simpan-rekod-pengguna">
+								<input type="hidden" name="user_id" value="#USERNAME#">
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

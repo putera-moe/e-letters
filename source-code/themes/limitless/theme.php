@@ -151,7 +151,7 @@ function ThemesHeader() {
 	if (isset($body)) {
 		echo "$body\n";
 	} else {
-		echo "<body class=\"layout-boxed\">\n";
+		echo "<body>\n";
 	}
 
 	# Anchor Named

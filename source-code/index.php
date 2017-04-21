@@ -72,8 +72,7 @@ function Auth() {
 		header('Location: '.SITEURL.'/?error=1');
 	}	
 }
-function Logout()
-{
+function Logout() {
 	global $config, $db;
 
 	$update = $db->Execute("UPDATE users SET session_id='', status_online='OFFLINE' WHERE user_id='".USERID."'");
@@ -106,14 +105,11 @@ function Logout()
 	kepada semua pengguna.
 
 */
-function Dashboard()
-{
+function Dashboard() {
 	global $config, $w_user;
 
 	if (is_online($w_user))
 	{
-		define('MODULE', 'Dashboard');
-		
 		if (is_admin($w_user))
 		{
 			$AdminMenu = '<div class="col-sm-6 col-md-4 mb-15">
@@ -142,8 +138,7 @@ function Dashboard()
 }
 
 
-function SenaraiPengguna()
-{
+function SenaraiPengguna() {
 	global $db, $config, $w_user;
 
 	if (is_admin($w_user))
@@ -171,8 +166,8 @@ function SenaraiPengguna()
 					<td>'.$StatusOnline.'</td>
 					<td>'.$StatusAkaun.'</td>
 					<td width="200" align="center">
-						<button type="button" class="btn btn-xlg bg-primary">Edit</button>
-						<button type="button" class="btn btn-xlg bg-danger">Padam</button>
+						<a href="index.php?p=edit-pengguna&user_id='.$Username.'" class="btn btn-xlg bg-primary">Edit</a>
+						<a href="index.php?p=padam-pengguna&user_id='.$Username.'" class="btn btn-xlg bg-danger">Padam</a>
 					</td>
 				</tr>';
 			}
@@ -192,8 +187,7 @@ function SenaraiPengguna()
 	}
 }
 
-function TambahPengguna()
-{
+function TambahPengguna() {
 	global $db, $config, $w_user;
 
 	if (is_admin($w_user))
@@ -209,9 +203,75 @@ function TambahPengguna()
 		Login();
 	}
 }
+function EditPengguna() {
+	global $db, $config, $w_user;
 
-function SimpanRekodPengguna()
-{
+	if (is_admin($w_user))
+	{
+		$Username = $_REQUEST['user_id'];
+
+		$r = $db->Execute("SELECT * FROM users WHERE user_id='$Username'");
+		if (!$r) {
+			die($db->ErrorMsg());
+		}
+
+		if ($r->RecordCount() > 0)
+		{
+			$row = $r->FetchRow();
+
+			$Username = $row['user_id'];
+			$Nama = $row['nama'];
+			$Jawatan = $row['jawatan'];			
+			$StatusAkaun = $row['account_status'];
+			$KumpPengguna = strtoupper($row['user_role']);
+
+			if ($StatusAkaun == 'AKTIF')
+			{
+				$StatusAkaunAktif = 'selected';
+				$StatusAkaunTidakAktif = '';
+			}
+			else
+			{
+				$StatusAkaunAktif = '';
+				$StatusAkaunTidakAktif = 'selected';
+			}
+
+			if ($KumpPengguna == 'ADMIN')
+			{
+				$KumpPenggunaAdmin = 'selected';
+				$KumpPenggunaUser = '';
+			}
+			else
+			{
+				$KumpPenggunaAdmin = '';
+				$KumpPenggunaUser = 'selected';
+			}
+
+			include(WEB_INCLUDES."header.php");
+			$t = new Template;
+			$t->Load(WEB_TEMPLATES.'edit-pengguna.html');
+			$t->Replace('USERNAME', $Username);
+			$t->Replace('NAMA', $Nama);
+			$t->Replace('JAWATAN', $Jawatan);
+			$t->Replace('STATUS_AKAUN_AKTIF', $StatusAkaunAktif);
+			$t->Replace('STATUS_AKAUN_TIDAK_AKTIF', $StatusAkaunTidakAktif);
+			$t->Replace('KUMP_PENGGUNA_ADMIN', $KumpPenggunaAdmin);
+			$t->Replace('KUMP_PENGGUNA_USER', $KumpPenggunaUser);
+			$t->Publish();
+			include(WEB_INCLUDES."footer.php");
+
+		}
+		else
+		{
+			die('Rekod pengguna ini tiada di dalam pangkalan data.');
+		}		
+	}
+	else
+	{
+		Login();
+	}
+}
+function SimpanRekodPengguna() {
 	global $db, $config, $w_user;
 
 	if (is_admin($w_user))
@@ -224,18 +284,76 @@ function SimpanRekodPengguna()
 		$status_akaun = $_REQUEST['status_akaun'];
 		$kumpulan_pengguna = $_REQUEST['kumpulan_pengguna'];
 
-		// check username dulu
-		$record = RecordCount("SELECT * FROM users WHERE user_id='$username'");
-		if ($record == 1)
+		// jika tengah edit
+		$user_id = $_REQUEST['user_id'];
+
+		if (strlen($user_id) == 0)
 		{
-			die('Maaf ! username ini telah wujud dalam sistem.');
+			# TAMBAH PENGGUNA BARU
+
+			// check username dulu
+			$record = RecordCount("SELECT * FROM users WHERE user_id='$username'");
+			if ($record == 1)
+			{
+				die('Maaf ! username ini telah wujud dalam sistem.');
+			}
+
+			// Encrypted password dia
+			$encrypted_pwd = strtoupper(md5(strtoupper($pwd) . $config->LicenseKey));
+
+			// masuk dalam database
+			$r = $db->Execute("INSERT INTO users (user_id,pwd,account_status,user_role,nama,jawatan) VALUES ('$username','$encrypted_pwd','$status_akaun','$kumpulan_pengguna','$nama','$jawatan')");
+			if (!$r) {
+				die($db->ErrorMsg());
+			}
+		}
+		else
+		{
+			# KEMASKINI DATA PENGGUNA
+
+			// check username dulu
+			$record = RecordCount("SELECT * FROM users WHERE user_id='$username' AND user_id != '$user_id'");
+			if ($record == 1)
+			{
+				die('Maaf ! username ini telah wujud dalam sistem.');
+			}
+
+			// Encrypted password dia (jika set password)
+			if (strlen($pwd) > 0) {
+				$encrypted_pwd = strtoupper(md5(strtoupper($pwd) . $config->LicenseKey));
+				$UpdatePassword = ", SET pwd='$encrypted_pwd' ";
+			}
+
+			// kemaskini rekod
+			$r = $db->Execute("UPDATE users SET user_id='$username', account_status='$status_akaun', 
+			user_role='$kumpulan_pengguna', nama='$nama', jawatan='$jawatan' WHERE user_id='$user_id'");
+			if (!$r) {
+				die($db->ErrorMsg());
+			}
 		}
 
-		// Encrypted password dia
-		$encrypted_pwd = strtoupper(md5(strtoupper($pwd) . $config->LicenseKey));
+		header('Location: '.SITEURL.'/?p=senarai-pengguna');
+	}
+	else
+	{
+		Login();
+	}
+}
+function PadamPengguna() {
+	global $db, $config, $w_user;
 
-		// masuk dalam database
-		$r = $db->Execute("INSERT INTO users (user_id,pwd,account_status,user_role,nama,jawatan) VALUES ('$username','$encrypted_pwd','$status_akaun','$kumpulan_pengguna','$nama','$jawatan')");
+	if (is_admin($w_user))
+	{
+		$user_id = $_REQUEST['user_id'];
+
+		$record = RecordCount("SELECT * FROM users WHERE user_id='$user_id'");
+		if ($record == 0)
+		{
+			die('Maaf ! username ini tidak wujud dalam sistem.');
+		}
+
+		// padam dari pangkalan data
+		$r = $db->Execute("DELETE FROM users WHERE user_id='$user_id'");
 		if (!$r) {
 			die($db->ErrorMsg());
 		}
@@ -275,14 +393,14 @@ switch ($p)
 	case "tambah-pengguna":
 		TambahPengguna();
 	break;
-	case "padam-pengguna":
-		PadamPengguna();
-	break;
 	case "edit-pengguna":
 		EditPengguna();
 	break;
 	case "simpan-rekod-pengguna":
 		SimpanRekodPengguna();
 	break;
+	case "padam-pengguna":
+		PadamPengguna();
+	break;	
 }
 ?>
